@@ -186,9 +186,8 @@ public void OnConfigsExecuted()
 	g_cpluginTag.GetString(g_sTag, sizeof(g_sTag));
 	
 	// Prepare & Format log files
-	char sDate[12], sBuffer[12];
-	g_clogDateFormat.GetString(sBuffer, sizeof(sBuffer));
-	FormatTime(sDate, sizeof(sDate), sBuffer);
+	char sDate[12];
+	FormatTime(sDate, sizeof(sDate), "%y-%m-%d");
 	
 	g_clogFile.GetString(g_sLogFile, sizeof(g_sLogFile));
 	g_cerrFile.GetString(g_sErrorFile, sizeof(g_sErrorFile));
