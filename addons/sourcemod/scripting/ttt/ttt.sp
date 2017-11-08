@@ -3129,6 +3129,13 @@ public Action Timer_5(Handle timer)
 		{
 			continue;
 		}
+		
+		int iKarma;
+		
+		if (g_iKarma[i] < 0)
+		{
+			iKarma = g_iKarma[i] * -1;
+		}
 
 		if (g_bKarma[i] && g_ckarmaBan.IntValue != 0 && g_iKarma[i] <= g_ckarmaBan.IntValue)
 		{
@@ -3144,9 +3151,6 @@ public Action Timer_5(Handle timer)
 	{
 		CheckPlayers();
 	}
-
-	Call_StartForward(g_hOnUpdate5);
-	Call_Finish();
 }
 
 void CheckPlayers()
