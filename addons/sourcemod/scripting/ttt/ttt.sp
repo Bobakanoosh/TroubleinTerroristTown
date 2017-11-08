@@ -3137,7 +3137,7 @@ public Action Timer_5(Handle timer)
 			iKarma = g_iKarma[i] * -1;
 		}
 
-		if (g_bKarma[i] && g_ckarmaBan.IntValue != 0 && g_iKarma[i] <= g_ckarmaBan.IntValue)
+		if (g_bKarma[i] && g_ckarmaBan.IntValue != 0 && iKarma <= g_ckarmaBan.IntValue)
 		{
 			BanBadPlayerKarma(i);
 		}
