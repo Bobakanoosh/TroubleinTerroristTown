@@ -249,7 +249,7 @@ public Action Command_Logs(int client, int args)
 					{
 						LoopValidClients(j)
 						{
-							CPrintToChat(j, g_sTag, "watching logs alive", j, client);
+							CPrintToChat(j, "%s %T", g_sTag, "watching logs alive", j, client);
 						}
 					}
 					else if (g_cLogsNotifyAlive.IntValue == 2)
@@ -258,7 +258,7 @@ public Action Command_Logs(int client, int args)
 						{
 							if (TTT_HasFlags(j, sAccess))
 							{
-								CPrintToChat(j, g_sTag, "watching logs alive", j, client);
+								CPrintToChat(j, "%s %T", g_sTag, "watching logs alive", j, client);
 							}
 						}
 					}
@@ -268,7 +268,7 @@ public Action Command_Logs(int client, int args)
 		return Plugin_Continue;
 	}
 
-	CPrintToChat(client, g_sTag, "you cant see logs", client);
+	CPrintToChat(client, "%s %T", g_sTag, "you cant see logs", client);
 	return Plugin_Handled;
 }
 
@@ -283,7 +283,7 @@ stock void ShowLogs(int client)
 		}
 		else
 		{
-			CPrintToChat(client, g_sTag, "no logs yet", client);
+			CPrintToChat(client, "%s %T", g_sTag, "no logs yet", client);
 		}
 
 		return;
@@ -303,7 +303,7 @@ stock void ShowLogs(int client)
 	}
 	else
 	{
-		CPrintToChat(client, g_sTag, "Receiving logs", client);
+		CPrintToChat(client, "%s %T", g_sTag, "Receiving logs", client);
 		PrintToConsole(client, "--------------------------------------");
 		PrintToConsole(client, "---------------TTT LOGS---------------");
 	}
@@ -338,7 +338,7 @@ stock void ShowLogs(int client)
 			LogToFileEx(g_sLogFile, "--------------------------------------");
 		else
 		{
-			CPrintToChat(client, g_sTag, "See your console", client);
+			CPrintToChat(client, "%s %T", g_sTag, "See your console", client);
 			PrintToConsole(client, "--------------------------------------");
 			PrintToConsole(client, "--------------------------------------");
 		}
@@ -419,7 +419,7 @@ public void OnCreate(any data)
 				LogToFileEx(g_sLogFile, "--------------------------------------");
 			else
 			{
-				CPrintToChat(client, g_sTag, "See your console", client);
+				CPrintToChat(client, "%s %T", g_sTag, "See your console", client);
 				PrintToConsole(client, "--------------------------------------");
 				PrintToConsole(client, "--------------------------------------");
 			}
@@ -448,7 +448,7 @@ public Action Command_InterceptSuicide(int client, const char[] command, int arg
 {
 	if (g_cblockSuicide.BoolValue && IsPlayerAlive(client))
 	{
-		CPrintToChat(client, g_sTag, "Suicide Blocked", client);
+		CPrintToChat(client, "%s %T", g_sTag, "Suicide Blocked", client);
 		return Plugin_Handled;
 	}
 	return Plugin_Continue;
@@ -570,7 +570,7 @@ public Action Command_Karma(int client, int args)
 		return Plugin_Handled;
 	}
 
-	CPrintToChat(client, g_sTag, "Your karma is", client, g_iKarma[client]);
+	CPrintToChat(client, "%s %T", g_sTag, "Your karma is", client, g_iKarma[client]);
 
 	return Plugin_Handled;
 }
@@ -747,7 +747,7 @@ public Action Timer_Selection(Handle hTimer)
 		g_bInactive = true;
 		LoopValidClients(i)
 		{
-			CPrintToChat(i, g_sTag, "MIN PLAYERS REQUIRED FOR PLAY", i, g_crequiredPlayers.IntValue);
+			CPrintToChat(i, "%s %T", g_sTag, "MIN PLAYERS REQUIRED FOR PLAY", i, g_crequiredPlayers.IntValue);
 		}
 
 		g_bCheckPlayers = true;
@@ -891,20 +891,20 @@ public Action Timer_Selection(Handle hTimer)
 		if ((!g_cpublicKarma.BoolValue) && g_ckarmaRound.BoolValue)
 		{
 			g_iKarmaStart[i] = g_iKarma[i];
-			CPrintToChat(i, g_sTag, "All karma has been updated", i);
+			CPrintToChat(i, "%s %T", g_sTag, "All karma has been updated", i);
 		}
 
-		CPrintToChat(i, g_sTag, "TEAMS HAS BEEN SELECTED", i);
+		CPrintToChat(i, "%s %T", g_sTag, "TEAMS HAS BEEN SELECTED", i);
 
 		if (g_iRole[i] != TTT_TEAM_TRAITOR)
 		{
-			CPrintToChat(i, g_sTag, "TRAITORS HAS BEEN SELECTED", i, iTraitors);
+			CPrintToChat(i, "%s %T", g_sTag, "TRAITORS HAS BEEN SELECTED", i, iTraitors);
 		}
 		else
 		{
 			if (g_cShowTraitors.BoolValue)
 			{
-				CPrintToChat(i, g_sTag, "Your Traitor Partners", i);
+				CPrintToChat(i, "%s %T", g_sTag, "Your Traitor Partners", i);
 				int iCount = 0;
 			
 				LoopValidClients(j)
@@ -913,13 +913,13 @@ public Action Timer_Selection(Handle hTimer)
 					{
 						continue;
 					}
-					CPrintToChat(i, g_sTag, "Traitor List", i, j);
+					CPrintToChat(i, "%s %T", g_sTag, "Traitor List", i, j);
 					iCount++;
 				}
 			
 				if (iCount == 0)
 				{
-					CPrintToChat(i, g_sTag, "No Traitor Partners", i);
+					CPrintToChat(i, "%s %T", g_sTag, "No Traitor Partners", i);
 				}
 			}
 		}
@@ -1044,7 +1044,7 @@ stock void TeamInitialize(int client)
 			GivePlayerItem(client, sBuffer);
 		}
 
-		CPrintToChat(client, g_sTag, "Your Team is DETECTIVES", client);
+		CPrintToChat(client, "%s %T", g_sTag, "Your Team is DETECTIVES", client);
 
 		if (g_cspawnHPD.IntValue > 0)
 		{
@@ -1064,7 +1064,7 @@ stock void TeamInitialize(int client)
 	}
 	else if (g_iRole[client] == TTT_TEAM_TRAITOR)
 	{
-		CPrintToChat(client, g_sTag, "Your Team is TRAITORS", client);
+		CPrintToChat(client, "%s %T", g_sTag, "Your Team is TRAITORS", client);
 
 		if (g_cspawnHPT.IntValue > 0)
 		{
@@ -1091,7 +1091,7 @@ stock void TeamInitialize(int client)
 	}
 	else if (g_iRole[client] == TTT_TEAM_INNOCENT)
 	{
-		CPrintToChat(client, g_sTag, "Your Team is INNOCENTS", client);
+		CPrintToChat(client, "%s %T", g_sTag, "Your Team is INNOCENTS", client);
 
 		if (g_cspawnHPI.IntValue > 0)
 		{
@@ -1269,7 +1269,7 @@ public Action Event_PlayerSpawn(Event event, const char[] name, bool dontBroadca
 
 		if (!g_bInactive && g_cshowKarmaOnSpawn.BoolValue)
 		{
-			CPrintToChat(client, g_sTag, "Your karma is", client, g_iKarma[client]);
+			CPrintToChat(client, "%s %T", g_sTag, "Your karma is", client, g_iKarma[client]);
 		}
 
 		if (g_cenableNoBlock.BoolValue)
@@ -2073,15 +2073,15 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 	{
 		if (g_iRole[iAttacker] == TTT_TEAM_TRAITOR)
 		{
-			CPrintToChat(client, g_sTag, "Your killer is a Traitor", client);
+			CPrintToChat(client, "%s %T", g_sTag, "Your killer is a Traitor", client);
 		}
 		else if (g_iRole[iAttacker] == TTT_TEAM_DETECTIVE)
 		{
-			CPrintToChat(client, g_sTag, "Your killer is a Detective", client);
+			CPrintToChat(client, "%s %T", g_sTag, "Your killer is a Detective", client);
 		}
 		else if (g_iRole[iAttacker] == TTT_TEAM_INNOCENT)
 		{
-			CPrintToChat(client, g_sTag, "Your killer is an Innocent", client);
+			CPrintToChat(client, "%s %T", g_sTag, "Your killer is an Innocent", client);
 		}
 	}
 
@@ -2089,15 +2089,15 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 	{
 		if (g_iRole[client] == TTT_TEAM_TRAITOR)
 		{
-			CPrintToChat(iAttacker, g_sTag, "You killed a Traitor", iAttacker);
+			CPrintToChat(iAttacker, "%s %T", g_sTag, "You killed a Traitor", iAttacker);
 		}
 		else if (g_iRole[client] == TTT_TEAM_DETECTIVE)
 		{
-			CPrintToChat(iAttacker, g_sTag, "You killed a Detective", iAttacker);
+			CPrintToChat(iAttacker, "%s %T", g_sTag, "You killed a Detective", iAttacker);
 		}
 		else if (g_iRole[client] == TTT_TEAM_INNOCENT)
 		{
-			CPrintToChat(iAttacker, g_sTag, "You killed an Innocent", iAttacker);
+			CPrintToChat(iAttacker, "%s %T", g_sTag, "You killed an Innocent", iAttacker);
 		}
 	}
 
@@ -2258,7 +2258,7 @@ public Action CS_OnTerminateRound(float &delay, CSRoundEndReason &reason)
 		if ((!g_cpublicKarma.BoolValue) && g_ckarmaRound.BoolValue)
 		{
 			g_iKarmaStart[client] = g_iKarma[client];
-			CPrintToChat(client, g_sTag, "All karma has been updated", client);
+			CPrintToChat(client, "%s %T", g_sTag, "All karma has been updated", client);
 		}
 
 		if (IsPlayerAlive(client))
@@ -2312,7 +2312,7 @@ public Action CS_OnTerminateRound(float &delay, CSRoundEndReason &reason)
 	{
 		LoopValidClients(client)
 		{
-			CPrintToChat(client, g_sTag, "next round in", client, delay);
+			CPrintToChat(client, "%s %T", g_sTag, "next round in", client, delay);
 		}
 	}
 
@@ -2538,19 +2538,19 @@ public int TTT_OnButtonPress(int client, int button)
 							if (iRagdollC[VictimTeam] == TTT_TEAM_INNOCENT)
 							{
 								LoopValidClients(j)
-									CPrintToChat(j, g_sTag, "Found Innocent", j, client, iRagdollC[VictimName]);
+									CPrintToChat(j, "%s %T", g_sTag, "Found Innocent", j, client, iRagdollC[VictimName]);
 								SetEntityRenderColor(iEntity, 0, 255, 0, 255);
 							}
 							else if (iRagdollC[VictimTeam] == TTT_TEAM_DETECTIVE)
 							{
 								LoopValidClients(j)
-									CPrintToChat(j, g_sTag, "Found Detective", j, client, iRagdollC[VictimName]);
+									CPrintToChat(j, "%s %T", g_sTag, "Found Detective", j, client, iRagdollC[VictimName]);
 								SetEntityRenderColor(iEntity, 0, 0, 255, 255);
 							}
 							else if (iRagdollC[VictimTeam] == TTT_TEAM_TRAITOR)
 							{
 								LoopValidClients(j)
-									CPrintToChat(j, g_sTag, "Found Traitor", j, client, iRagdollC[VictimName]);
+									CPrintToChat(j, "%s %T", g_sTag, "Found Traitor", j, client, iRagdollC[VictimName]);
 								SetEntityRenderColor(iEntity, 255, 0, 0, 255);
 							}
 
@@ -2730,7 +2730,7 @@ stock int addKarma(int client, int karma, bool message = false)
 		}
 		else
 		{
-			CPrintToChat(client, g_sTag, "karma earned", client, karma, g_iKarma[client]);
+			CPrintToChat(client, "%s %T", g_sTag, "karma earned", client, karma, g_iKarma[client]);
 		}
 	}
 
@@ -2775,7 +2775,7 @@ stock int subtractKarma(int client, int karma, bool message = false)
 		}
 		else
 		{
-			CPrintToChat(client, g_sTag, "lost karma", client, karma, g_iKarma[client]);
+			CPrintToChat(client, "%s %T", g_sTag, "lost karma", client, karma, g_iKarma[client]);
 		}
 	}
 
@@ -2842,7 +2842,7 @@ stock void manageRDM(int client)
 	int iAttacker = g_iRDMAttacker[client];
 	if (!IsClientInGame(iAttacker) || iAttacker < 0 || iAttacker > MaxClients)
 	{
-		CPrintToChat(client, g_sTag, "The player who RDM'd you is no longer available", client);
+		CPrintToChat(client, "%s %T", g_sTag, "The player who RDM'd you is no longer available", client);
 		return;
 	}
 	char sAttackerName[MAX_NAME_LENGTH];
@@ -2879,29 +2879,29 @@ public int manageRDMHandle(Menu menu, MenuAction action, int client, int option)
 		GetMenuItem(menu, option, info, sizeof(info));
 		if (StrEqual(info, "Forgive", false))
 		{
-			CPrintToChat(client, g_sTag, "Choose Forgive Victim", client, iAttacker);
-			CPrintToChat(iAttacker, g_sTag, "Choose Forgive Attacker", iAttacker, client);
+			CPrintToChat(client, "%s %T", g_sTag, "Choose Forgive Victim", client, iAttacker);
+			CPrintToChat(iAttacker, "%s %T", g_sTag, "Choose Forgive Attacker", iAttacker, client);
 			g_iRDMAttacker[client] = -1;
 		}
 		if (StrEqual(info, "Punish", false))
 		{
 			LoopValidClients(i)
-				CPrintToChat(i, g_sTag, "Choose Punish", i, client, iAttacker);
+				CPrintToChat(i, "%s %T", g_sTag, "Choose Punish", i, client, iAttacker);
 			ServerCommand("sm_slay #%i 2", GetClientUserId(iAttacker));
 			g_iRDMAttacker[client] = -1;
 		}
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		CPrintToChat(client, g_sTag, "Choose Forgive Victim", client, iAttacker);
-		CPrintToChat(iAttacker, g_sTag, "Choose Forgive Attacker", iAttacker, client);
+		CPrintToChat(client, "%s %T", g_sTag, "Choose Forgive Victim", client, iAttacker);
+		CPrintToChat(iAttacker, "%s %T", g_sTag, "Choose Forgive Attacker", iAttacker, client);
 		g_iRDMAttacker[client] = -1;
 	}
 	else if (action == MenuAction_End)
 	{
 		delete menu;
-		CPrintToChat(client, g_sTag, "Choose Forgive Victim", client, iAttacker);
-		CPrintToChat(iAttacker, g_sTag, "Choose Forgive Attacker", iAttacker, client);
+		CPrintToChat(client, "%s %T", g_sTag, "Choose Forgive Victim", client, iAttacker);
+		CPrintToChat(iAttacker, "%s %T", g_sTag, "Choose Forgive Attacker", iAttacker, client);
 		g_iRDMAttacker[client] = -1;
 		
 		delete menu;
@@ -2975,7 +2975,7 @@ public Action Command_SetRole(int client, int args)
 		
 		TeamInitialize(target);
 		CS_SetClientClanTag(target, " ");
-		CPrintToChat(client, g_sTag, "Player is Now Innocent", client, target);
+		CPrintToChat(client, "%s %T", g_sTag, "Player is Now Innocent", client, target);
 		LogAction(client, target, "\"%L\" set the role of \"%L\" to \"%s\"", client, target, "Innocent");
 		
 		return Plugin_Handled;
@@ -2991,7 +2991,7 @@ public Action Command_SetRole(int client, int args)
 		
 		TeamInitialize(target);
 		CS_SetClientClanTag(target, " ");
-		CPrintToChat(client, g_sTag, "Player is Now Traitor", client, target);
+		CPrintToChat(client, "%s %T", g_sTag, "Player is Now Traitor", client, target);
 		LogAction(client, target, "\"%L\" set the role of \"%L\" to \"%s\"", client, target, "Traitor");
 		
 		return Plugin_Handled;
@@ -3006,7 +3006,7 @@ public Action Command_SetRole(int client, int args)
 		g_iRole[target] = TTT_TEAM_DETECTIVE;
 		
 		TeamInitialize(target);
-		CPrintToChat(client, g_sTag, "Player is Now Detective", client, target);
+		CPrintToChat(client, "%s %T", g_sTag, "Player is Now Detective", client, target);
 		LogAction(client, target, "\"%L\" set the role of \"%L\" to \"%s\"", client, target, "Detective");
 		
 		return Plugin_Handled;
@@ -3072,7 +3072,7 @@ public Action Command_SetKarma(int client, int args)
 
 		setKarma(target, karma, true);
 
-		CPrintToChat(client, g_sTag, "AdminSet", client, target, karma, "Karma");
+		CPrintToChat(client, "%s %T", g_sTag, "AdminSet", client, target, karma, "Karma");
 		LogAction(client, target, "\"%L\" set the karma of \"%L\" to \"%i\"", client, target, karma);
 	}
 
@@ -3088,19 +3088,19 @@ public Action Command_Status(int client, int args)
 
 	if (g_iRole[client] == TTT_TEAM_UNASSIGNED)
 	{
-		CPrintToChat(client, g_sTag, "You Are Unassigned", client);
+		CPrintToChat(client, "%s %T", g_sTag, "You Are Unassigned", client);
 	}
 	else if (g_iRole[client] == TTT_TEAM_INNOCENT)
 	{
-		CPrintToChat(client, g_sTag, "You Are Now Innocent", client);
+		CPrintToChat(client, "%s %T", g_sTag, "You Are Now Innocent", client);
 	}
 	else if (g_iRole[client] == TTT_TEAM_DETECTIVE)
 	{
-		CPrintToChat(client, g_sTag, "You Are Now Detective", client);
+		CPrintToChat(client, "%s %T", g_sTag, "You Are Now Detective", client);
 	}
 	else if (g_iRole[client] == TTT_TEAM_TRAITOR)
 	{
-		CPrintToChat(client, g_sTag, "You Are Now Traitor", client);
+		CPrintToChat(client, "%s %T", g_sTag, "You Are Now Traitor", client);
 	}
 
 	return Plugin_Handled;
@@ -3240,7 +3240,7 @@ public Action OnUse(int entity, int activator, int caller, UseType type, float v
 
 			LoopValidClients(i)
 			{
-				CPrintToChat(i, g_sTag, "Triggered Falling Building", i, activator);
+				CPrintToChat(i, "%s %T", g_sTag, "Triggered Falling Building", i, activator);
 			}
 		}
 	}
@@ -3291,7 +3291,7 @@ public Action Command_KarmaReset(int client, int args)
 	{
 		if (!IsFakeClient(i))
 		{
-			CPrintToChat(client, g_sTag, "AdminSet", client, i, g_cstartKarma.IntValue, "Karma");
+			CPrintToChat(client, "%s %T", g_sTag, "AdminSet", client, i, g_cstartKarma.IntValue, "Karma");
 			setKarma(i, g_cstartKarma.IntValue, true);
 			LogAction(client, i, "\"%L\" reset the karma of \"%L\" to \"%i\"", client, i, g_cstartKarma.IntValue);
 		}
