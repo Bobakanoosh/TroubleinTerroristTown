@@ -98,4 +98,6 @@ void SetupConfig()
 	g_cSteamIDLogFormat = AutoExecConfig_CreateConVar("ttt_steamid_log_format", "1", "Which steam id format to you prefer? 1 - SteamID2 (STEAM_1:1:40828751), 2 - SteamID3 ([U:1:81657503]) or 3 - SteamID64/CommunityID (76561198041923231)", _, true, 0.0, true, 3.0);
 	g_cDebugMessages = AutoExecConfig_CreateConVar("ttt_show_debug_messages", "0", "Show debug messages to all root admins?", _, true, 0.0, true, 1.0);
 	g_cDisableDamageSelection = AutoExecConfig_CreateConVar("ttt_disable_damage_selection", "1", "Disable damage during team selection? This could prevent some bugs.", _, true, 0.0, true, 1.0);
+	
+	g_cpluginTag.AddChangeHook(OnConVarChanged);
 }

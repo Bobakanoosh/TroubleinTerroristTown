@@ -152,6 +152,11 @@ public void OnPluginStart()
 
 	if (TTT_GetSQLConnection() != null)
 	{
+		if (g_cDebugMessages.BoolValue)
+		{
+			LogMessage("(OnPluginStart) Handle is not null");
+		}
+		
 		LateLoadClients(true);
 	}
 }
@@ -210,6 +215,14 @@ public void OnConfigsExecuted()
 	PrecacheModel(sModel, true);
 	g_cmodelT.GetString(sModel, sizeof(sModel));
 	PrecacheModel(sModel, true);
+}
+
+public void OnConVarChanged(ConVar convar, const char[] oldValue, const char[] newValue)
+{
+	if (convar == g_cpluginTag)
+	{
+		g_cpluginTag.GetString(g_sTag, sizeof(g_sTag));
+	}
 }
 
 public void TTT_OnSQLConnect(Database db)
@@ -1302,6 +1315,11 @@ public void OnClientPutInServer(int client)
 
 void LateLoadClients(bool bHook = false)
 {
+	if (g_cDebugMessages.BoolValue)
+	{
+		LogMessage("(LateLoadClients) bHook: %d", bHook);
+	}
+	
 	LoopValidClients(i)
 	{
 		LoadClientKarma(GetClientUserId(i));
@@ -3398,6 +3416,11 @@ stock void LoadClientKarma(int userid)
 
 	if (!IsFakeClient(client))
 	{
+		if (g_cDebugMessages.BoolValue)
+		{
+			LogMessage("(LoadClientKarma) Client: \"%L\"", client);
+		}
+		
 		char sCommunityID[64];
 
 		if (!GetClientAuthId(client, AuthId_SteamID64, sCommunityID, sizeof(sCommunityID)))
