@@ -1576,20 +1576,17 @@ public Action Event_PlayerDeathPre(Event event, const char[] menu, bool dontBroa
 
 			if (g_iInnoKills[iAttacker] >= g_cpunishInnoKills.IntValue)
 			{
-				// ServerCommand("sm_slay #%i 5", GetClientUserId(iAttacker));
-				TTT_AddRoundSlays(iAttacker, 5, true); // TODO: Add option
+				TTT_AddRoundSlays(iAttacker, g_cRoundSlayInno.IntValue, true);
 			}
 
 			if (g_iTraitorKills[iAttacker] >= g_cpunishTraitorKills.IntValue)
 			{
-				// ServerCommand("sm_slay #%i 5", GetClientUserId(iAttacker));
-				TTT_AddRoundSlays(iAttacker, 5, true); // TODO: Add option
+				TTT_AddRoundSlays(iAttacker, g_cRoundSlayTraitor.IntValue, true);
 			}
 
 			if (g_iDetectiveKills[iAttacker] >= g_cpunishDetectiveKills.IntValue)
 			{
-				// ServerCommand("sm_slay #%i 5", GetClientUserId(iAttacker));
-				TTT_AddRoundSlays(iAttacker, 5, true); // TODO: Add option
+				TTT_AddRoundSlays(iAttacker, g_cRoundSlayDetective.IntValue, true);
 			}
 		}
 	}
@@ -2934,8 +2931,7 @@ public int manageRDMHandle(Menu menu, MenuAction action, int client, int option)
 		{
 			LoopValidClients(i)
 				CPrintToChat(i, "%s %T", g_sTag, "Choose Punish", i, client, iAttacker);
-			// ServerCommand("sm_slay #%i 2", GetClientUserId(iAttacker));
-			TTT_AddRoundSlays(iAttacker, 2, true); // TODO: Add option
+			TTT_AddRoundSlays(iAttacker, g_cRoundSlayPlayerRDM.IntValue, true);
 			g_iRDMAttacker[client] = -1;
 		}
 	}
@@ -3284,8 +3280,7 @@ public Action OnUse(int entity, int activator, int caller, UseType type, float v
 	{
 		if (g_iRole[activator] == TTT_TEAM_INNOCENT || g_iRole[activator] == TTT_TEAM_DETECTIVE || g_iRole[activator] == TTT_TEAM_UNASSIGNED)
 		{
-			// ServerCommand("sm_slay #%i 2", GetClientUserId(activator));
-			TTT_AddRoundSlays(activator, 2, true); // TODO: Add option
+			TTT_AddRoundSlays(activator, g_cRoundSlayDestroyTrigger.IntValue, true);
 
 			LoopValidClients(i)
 			{
