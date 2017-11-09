@@ -253,7 +253,7 @@ public int Native_AddRoundSlays(Handle plugin, int numParams)
 		
 		g_iRoundSlays[client] += rounds;
 		
-		if (force && IsPlayerAlive(client) && g_iRoundSlays[client] > 0)
+		if (g_bRoundStarted && force && IsPlayerAlive(client) && g_iRoundSlays[client] > 0)
 		{
 			ForcePlayerSuicide(client);
 			g_iRoundSlays[client]--;
@@ -278,7 +278,7 @@ public int Native_SetRoundSlays(Handle plugin, int numParams)
 		
 		g_iRoundSlays[client] = rounds;
 		
-		if (force && IsPlayerAlive(client) && g_iRoundSlays[client] > 0)
+		if (g_bRoundStarted && force && IsPlayerAlive(client) && g_iRoundSlays[client] > 0)
 		{
 			ForcePlayerSuicide(client);
 			g_iRoundSlays[client]--;
