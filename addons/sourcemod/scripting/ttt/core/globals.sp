@@ -237,3 +237,6 @@ ConVar g_cSetKarma = null;
 ConVar g_cAddSteamIDtoLogs = null;
 ConVar g_cSteamIDLogFormat = null;
 ConVar g_cDisableDamageSelection = null;
+
+Handle g_hRSCookie = null;
+int g_iRoundSlays[MAXPLAYERS + 1] =  { 0, ... };

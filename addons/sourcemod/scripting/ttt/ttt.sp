@@ -2,6 +2,7 @@
 #pragma newdecls required
 
 #include <sourcemod>
+#include <clientprefs>
 #include <cstrike>
 #include <sdkhooks>
 #include <multicolors>
@@ -77,6 +78,10 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	// Others
 	CreateNative("TTT_IsRoundActive", Native_IsRoundActive);
 	CreateNative("TTT_LogString", Native_LogString);
+	
+	// Round slays
+	CreateNative("TTT_AddRoundSlays", Native_AddRoundSlays);
+	CreateNative("TTT_SetRoundSlays", Native_SetRoundSlays);
 
 	RegPluginLibrary("ttt");
 
@@ -118,6 +123,15 @@ public void OnPluginStart()
 
 	RegConsoleCmd("sm_trules", Command_TRules);
 	RegConsoleCmd("sm_drules", Command_DetectiveRules);
+	
+	AddCommandListener(Command_LAW, "+lookatweapon");
+	AddCommandListener(Command_Say, "say");
+	AddCommandListener(Command_SayTeam, "say_team");
+	AddCommandListener(Command_InterceptSuicide, "kill");
+	AddCommandListener(Command_InterceptSuicide, "explode");
+	AddCommandListener(Command_InterceptSuicide, "spectate");
+	AddCommandListener(Command_InterceptSuicide, "jointeam");
+	AddCommandListener(Command_InterceptSuicide, "joinclass");
 
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("round_prestart", Event_RoundStartPre, EventHookMode_Pre);
@@ -131,15 +145,8 @@ public void OnPluginStart()
 	HookEvent("player_hurt", Event_PlayerHurt);
 
 	g_hGraceTime = FindConVar("mp_join_grace_time");
-
-	AddCommandListener(Command_LAW, "+lookatweapon");
-	AddCommandListener(Command_Say, "say");
-	AddCommandListener(Command_SayTeam, "say_team");
-	AddCommandListener(Command_InterceptSuicide, "kill");
-	AddCommandListener(Command_InterceptSuicide, "explode");
-	AddCommandListener(Command_InterceptSuicide, "spectate");
-	AddCommandListener(Command_InterceptSuicide, "jointeam");
-	AddCommandListener(Command_InterceptSuicide, "joinclass");
+	
+	g_hRSCookie = RegClientCookie("ttt2_round_slays", "Round Slays Cookie", CookieAccess_Private);
 
 	for (int i = 0; i < sizeof(g_sRadioCMDs); i++)
 	{
@@ -778,6 +785,16 @@ public Action Timer_Selection(Handle hTimer)
 	g_bRoundStarted = true;
 	g_bSelection = true;
 	g_bCheckPlayers = false;
+	
+	LoopValidClients(i)
+	{
+		if (IsPlayerAlive(i) && g_iRoundSlays[i] > 0)
+		{
+			ForcePlayerSuicide(i);
+			g_iRoundSlays[i]--;
+			UpdateRoundSlaysCookie(i);
+		}
+	}
 
 	int iTCount = GetTCount(aPlayers.Length);
 	int iDCount = GetDCount(aPlayers.Length);
@@ -1323,6 +1340,7 @@ void LateLoadClients(bool bHook = false)
 	LoopValidClients(i)
 	{
 		LoadClientKarma(GetClientUserId(i));
+		OnClientCookiesCached(i);
 
 		if (bHook)
 		{
@@ -1941,13 +1959,21 @@ public int Menu_AskClientForMicrophone(Menu menu, MenuAction action, int client,
 	return 0;
 }
 
+public void OnClientCookiesCached(int client)
+{
+	char sBuffer[12];
+	GetClientCookie(client, g_hRSCookie, sBuffer, sizeof(sBuffer));
+	g_iRoundSlays[client] = StringToInt(sBuffer);
+}
+
 public void OnClientDisconnect(int client)
 {
+	UpdateRoundSlaysCookie(client);
+	
 	if (IsClientInGame(client))
 	{
 		g_bKarma[client] = false;
 		g_bFound[client] = true;
-
 
 		if (g_cTranfserArmor.BoolValue)
 		{
@@ -3572,4 +3598,11 @@ void GiveWeaponsOnFailStart()
 			}
 		}
 	}
+}
+
+void UpdateRoundSlaysCookie(int client)
+{
+	char sBuffer[12];
+	IntToString(g_iRoundSlays[client], sBuffer, sizeof(sBuffer));
+	SetClientCookie(client, g_hRSCookie, sBuffer);
 }
