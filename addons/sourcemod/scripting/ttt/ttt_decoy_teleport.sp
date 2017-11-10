@@ -124,11 +124,11 @@ public Action Event_DecoyStarted(Event event, const char[] name, bool dontBroadc
 			int role = TTT_GetClientRole(client);
 			if (role == TTT_TEAM_TRAITOR)
 			{
-				TTT_AddClientCredits(client, g_iDPrice);
+				TTT_AddClientCredits(client, g_iTPrice);
 			}
 			else if (role == TTT_TEAM_DETECTIVE)
 			{
-				TTT_AddClientCredits(client, g_iTPrice);
+				TTT_AddClientCredits(client, g_iDPrice);
 			}
 
 			g_bHasTeleporter[client] = false;
