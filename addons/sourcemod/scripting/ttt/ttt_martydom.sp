@@ -46,8 +46,8 @@ public void OnPluginStart() {
 	
 	LoadTranslations("ttt.phrases");
 
-	StartConfig("futuristicgrenades");
-	CreateConVar("ttt2_futuristic_grenades_version", TTT_PLUGIN_VERSION, TTT_PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD | FCVAR_REPLICATED);
+	StartConfig("martydom");
+	CreateConVar("ttt2_martydom_version", TTT_PLUGIN_VERSION, TTT_PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD | FCVAR_REPLICATED);
 	g_cLongName = AutoExecConfig_CreateConVar("martydom_name", "Martydom", "The name of this item in the shop.");
 	g_cIPrice = AutoExecConfig_CreateConVar("md_i_price", "2000", "The amount of credits martydom costs as innocent. 0 to disable.");	
 	g_cTPrice = AutoExecConfig_CreateConVar("md_t_price", "2000", "The amount of credits martydom costs as traitor. 0 to disable.");
