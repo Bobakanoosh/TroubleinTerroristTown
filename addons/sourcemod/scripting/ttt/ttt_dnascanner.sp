@@ -45,7 +45,7 @@ public void OnPluginStart()
 	HookEvent("player_spawn", Event_PlayerSpawn);
 }
 
-public void OnAllPluginsLoaded()
+public void OnConfigsExecuted()
 {
 	ConVar hTag = FindConVar("ttt_plugin_tag");
 	hTag.GetString(g_sPluginTag, sizeof(g_sPluginTag));
