@@ -834,7 +834,7 @@ public Action Timer_Selection(Handle hTimer)
 			continue;
 		}
 
-		SetRandomSeed(iCurrentTime*100*counter++);
+		SetRandomSeed(iCurrentTime*++counter);
 		iRand = GetRandomInt(0, aPlayers.Length - 1);
 		client = aPlayers.Get(iRand);
 
@@ -881,7 +881,7 @@ public Action Timer_Selection(Handle hTimer)
 			break;
 		}
 
-		SetRandomSeed(iCurrentTime*100*counter++);
+		SetRandomSeed(iCurrentTime*++counter);
 		iRand = GetRandomInt(0, aPlayers.Length - 1);
 		client = aPlayers.Get(iRand);
 
