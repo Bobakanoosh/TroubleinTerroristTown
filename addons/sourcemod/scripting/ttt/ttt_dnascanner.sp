@@ -39,7 +39,7 @@ public void OnPluginStart()
 	g_cLongName = AutoExecConfig_CreateConVar("dna_name", "Dnascanner", "The name of the Dnascanner in the Shop");
 	g_cPrice = AutoExecConfig_CreateConVar("dna_price", "9000", "The amount of credits a dna scanner costs as detective. 0 to disable.");
 	g_cPrio = AutoExecConfig_CreateConVar("dna_sort_prio", "0", "The sorting priority of the dna scanner in the shop menu.");
-	g_cPrintToAll = AutoExecConfig_CreateConVar("dna_print_message_to_all", "0", "Print scanner to all players? (Default: false)");
+	g_cPrintToAll = AutoExecConfig_CreateConVar("dna_print_message_to_all", "0", "Print scanner to all players? (Default: false)", _, true, 0.0, true, 1.0);
 	EndConfig();
 
 	HookEvent("player_spawn", Event_PlayerSpawn);
