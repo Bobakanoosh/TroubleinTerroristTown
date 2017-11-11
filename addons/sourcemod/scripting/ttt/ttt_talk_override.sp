@@ -4,16 +4,15 @@
 #include <sourcemod>
 #include <sdktools>
 #include <multicolors>
-
 #include <ttt>
-#include <config_loader>
 
 #define PLUGIN_NAME TTT_PLUGIN_NAME ... " - Talk Override"
 
-bool g_bEnableTVoice = false;
+ConVar g_cEnableTVoice = null;
+
 bool g_bTVoice[MAXPLAYERS + 1] =  { false, ... };
-char g_sConfigFile[PLATFORM_MAX_PATH];
-char g_sPluginTag[PLATFORM_MAX_PATH] = "";
+
+char g_sPluginTag[128];
 
 public Plugin myinfo =
 {
@@ -28,19 +27,12 @@ public void OnPluginStart()
 {
 	TTT_IsGameCSGO();
 
-	BuildPath(Path_SM, g_sConfigFile, sizeof(g_sConfigFile), "configs/ttt/config.cfg");
-	Config_Setup("TTT", g_sConfigFile);
+	StartConfig("talk_override");
+	CreateConVar("ttt2_talk_override_version", TTT_PLUGIN_VERSION, TTT_PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD | FCVAR_REPLICATED);
+	g_cEnableTVoice = AutoExecConfig_CreateConVar("tor_traitor_voice_chat", "1", "Enable traitor voice chat (command for players: sm_tvoice)?", _, true, 0.0, true, 1.0);
+	EndConfig();
 
-	Config_LoadString("ttt_plugin_tag", "{orchid}[{green}T{darkred}T{blue}T{orchid}]{lightgreen} %T", "The prefix used in all plugin messages (DO NOT DELETE '%T')", g_sPluginTag, sizeof(g_sPluginTag));
-
-	Config_Done();
-
-	BuildPath(Path_SM, g_sConfigFile, sizeof(g_sConfigFile), "configs/ttt/talk_override.cfg");
-	Config_Setup("TTT-TalkOverride", g_sConfigFile);
-	g_bEnableTVoice = Config_LoadBool("tor_traitor_voice_chat", true, "Enable traitor voice chat (command for players: sm_tvoice)?");
-	Config_Done();
-
-	if (g_bEnableTVoice)
+	if (g_cEnableTVoice.BoolValue)
 	{
 		RegConsoleCmd("sm_tvoice", Command_TVoice);
 	}
@@ -50,6 +42,12 @@ public void OnPluginStart()
 	HookEvent("player_team", Event_PlayerTeam);
 
 	LoadTranslations("ttt.phrases");
+}
+
+public void OnConfigsExecuted()
+{
+	ConVar hTag = FindConVar("ttt_plugin_tag");
+	hTag.GetString(g_sPluginTag, sizeof(g_sPluginTag));
 }
 
 public Action Command_TVoice(int client, int args)
