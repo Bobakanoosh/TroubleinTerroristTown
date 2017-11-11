@@ -723,7 +723,7 @@ public Action Timer_Selection(Handle hTimer)
 
 	LoopValidClients(i)
 	{
-		if (GetClientTeam(i) != CS_TEAM_CT && GetClientTeam(i) != CS_TEAM_T  || (!g_bDebug && IsFakeClient(i)))
+		if (GetClientTeam(i) != CS_TEAM_CT && GetClientTeam(i) != CS_TEAM_T  || (!g_cDebug.BoolValue && IsFakeClient(i)))
 		{
 			continue;
 		}
@@ -963,7 +963,7 @@ public Action Timer_Selection(Handle hTimer)
 			continue;
 		}
 
-		if (!g_bDebug && IsFakeClient(i))
+		if (!g_cDebug.BoolValue && IsFakeClient(i))
 		{
 			continue;
 		}
@@ -2142,7 +2142,7 @@ public Action Timer_1(Handle timer)
 		{
 			g_bRoundStarted = false;
 
-			if (!g_bDebug)
+			if (!g_cDebug.BoolValue)
 			{
 				CS_TerminateRound(7.0, CSRoundEnd_TerroristWin);
 			}
@@ -2151,7 +2151,7 @@ public Action Timer_1(Handle timer)
 		{
 			g_bRoundStarted = false;
 
-			if (!g_bDebug)
+			if (!g_cDebug.BoolValue)
 			{
 				CS_TerminateRound(7.0, CSRoundEnd_CTWin);
 			}
@@ -2341,7 +2341,7 @@ public Action Timer_OnRoundEnd(Handle timer)
 	g_hRoundTimer = null;
 	g_bRoundStarted = false;
 
-	if (!g_bDebug)
+	if (!g_cDebug.BoolValue)
 	{
 		CS_TerminateRound(7.0, CSRoundEnd_CTWin);
 	}
@@ -3283,7 +3283,7 @@ void CheckPlayers()
 	{
 		g_bCheckPlayers = false;
 
-		if (!g_bDebug)
+		if (!g_cDebug.BoolValue)
 		{
 			CS_TerminateRound(3.0, CSRoundEnd_Draw);
 		}
@@ -3453,7 +3453,7 @@ void CheckTeams()
 		g_bRoundStarted = false;
 		g_bRoundEnded = true;
 
-		if (!g_bDebug)
+		if (!g_cDebug.BoolValue)
 		{
 			CS_TerminateRound(7.0, CSRoundEnd_TerroristWin);
 		}
@@ -3463,7 +3463,7 @@ void CheckTeams()
 		g_bRoundStarted = false;
 		g_bRoundEnded = true;
 
-		if (!g_bDebug)
+		if (!g_cDebug.BoolValue)
 		{
 			CS_TerminateRound(7.0, CSRoundEnd_CTWin);
 		}
@@ -3523,7 +3523,7 @@ stock void LoadClientKarma(int userid)
 		char sQuery[2048];
 		Format(sQuery, sizeof(sQuery), "SELECT `karma` FROM `ttt` WHERE `communityid`= \"%s\";", sCommunityID);
 
-		if (g_bDebug)
+		if (g_cDebug.BoolValue)
 		{
 			LogToFileEx(g_sLogFile, sQuery);
 		}
@@ -3556,7 +3556,7 @@ stock void UpdatePlayer(int client)
 		Format(sQuery, sizeof(sQuery), "INSERT OR REPLACE INTO ttt (communityid, karma) VALUES (\"%s\", %d);", sCommunityID, g_iKarma[client], g_iKarma[client]);
 	}
 
-	if (g_bDebug)
+	if (g_cDebug.BoolValue)
 	{
 		LogToFileEx(g_sLogFile, sQuery);
 	}
