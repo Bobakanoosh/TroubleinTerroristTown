@@ -127,7 +127,7 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort, bool count
 
 			if (g_bHasActiveStation[client])
 			{
-				CPrintToChat(client, "%s "%T", g_sPluginTag, "You already have an active Station", client);
+				CPrintToChat(client, "%s %T", g_sPluginTag, "You already have an active Station", client);
 
 				return Plugin_Stop;
 			}
@@ -293,7 +293,7 @@ void checkDistanceFromStation(int client)
 
 			if (!hurt)
 			{
-				CPrintToChat(client, "%s "%T", g_sPluginTag, "Healing From", client, owner);
+				CPrintToChat(client, "%s %T", g_sPluginTag, "Healing From", client, owner);
 			}
 
 			EmitSoundToClientAny(client, SND_WARNING);
@@ -334,7 +334,7 @@ void spawnStation(int client)
 		g_iStationHealth[client] = 10;
 		g_bHasActiveStation[client] = true;
 		g_iStationCharges[client] = ((role == TTT_TEAM_TRAITOR) ? g_iHurtCharges : g_iHealthCharges);
-		CPrintToChat(client, "%s "%T", g_sPluginTag, ((role == TTT_TEAM_TRAITOR) ? "Hurt Station Deployed" : "Health Station Deployed"), client);
+		CPrintToChat(client, "%s %T", g_sPluginTag, ((role == TTT_TEAM_TRAITOR) ? "Hurt Station Deployed" : "Health Station Deployed"), client);
 	}
 }
 

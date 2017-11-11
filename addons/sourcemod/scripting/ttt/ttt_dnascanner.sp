@@ -121,12 +121,12 @@ public Action TTT_OnBodyChecked(int client, int[] iRagdollC)
 		{
 			LoopValidClients(j)
 			{
-				CPrintToChat(j, "%s "%T", g_sPluginTag, "Detective scan found body", j, client, iRagdollC[AttackerName], iRagdollC[Weaponused]);
+				CPrintToChat(j, "%s %T", g_sPluginTag, "Detective scan found body", j, client, iRagdollC[AttackerName], iRagdollC[Weaponused]);
 			}
 		}
 		else
 		{
-			CPrintToChat(client, "%s "%T", g_sPluginTag, "Detective scan found body", client, client, iRagdollC[AttackerName], iRagdollC[Weaponused]);
+			CPrintToChat(client, "%s %T", g_sPluginTag, "Detective scan found body", client, client, iRagdollC[AttackerName], iRagdollC[Weaponused]);
 		}
 	}
 	else
@@ -135,12 +135,12 @@ public Action TTT_OnBodyChecked(int client, int[] iRagdollC)
 		{
 			LoopValidClients(j)
 			{
-				CPrintToChat(j, "%s "%T", g_sPluginTag, "Detective scan found body suicide", j, client);
+				CPrintToChat(j, "%s %T", g_sPluginTag, "Detective scan found body suicide", j, client);
 			}
 		}
 		else
 		{
-			CPrintToChat(client, "%s "%T", g_sPluginTag, "Detective scan found body suicide", client, client);
+			CPrintToChat(client, "%s %T", g_sPluginTag, "Detective scan found body suicide", client, client);
 		}
 	}
 

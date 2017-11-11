@@ -218,23 +218,23 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort, bool count
 
 			if (role == TTT_TEAM_DETECTIVE && g_iDPCount[client] >= g_iDCount)
 			{
-				CPrintToChat(client, "%s "%T", g_sPluginTag, "TaserMax", client, g_iDCount);
+				CPrintToChat(client, "%s %T", g_sPluginTag, "TaserMax", client, g_iDCount);
 				return Plugin_Stop;
 			}
 			else if (role == TTT_TEAM_INNOCENT && g_iIPCount[client] >= g_iICount)
 			{
-				CPrintToChat(client, "%s "%T", g_sPluginTag, "TaserMax", client, g_iICount);
+				CPrintToChat(client, "%s %T", g_sPluginTag, "TaserMax", client, g_iICount);
 				return Plugin_Stop;
 			}
 			else if (role == TTT_TEAM_TRAITOR && g_iTPCount[client] >= g_iTCount)
 			{
-				CPrintToChat(client, "%s "%T", g_sPluginTag, "TaserMax", client, g_iTCount);
+				CPrintToChat(client, "%s %T", g_sPluginTag, "TaserMax", client, g_iTCount);
 				return Plugin_Stop;
 			}
 
 			if (g_bTaser[client])
 			{
-				CPrintToChat(client, "%s "%T", g_sPluginTag, "AlreadyTaser", client);
+				CPrintToChat(client, "%s %T", g_sPluginTag, "AlreadyTaser", client);
 				return Plugin_Stop;
 			}
 
@@ -340,7 +340,7 @@ public Action OnTraceAttack(int iVictim, int &iAttacker, int &inflictor, float &
 			}
 			else
 			{
-				CPrintToChat(iAttacker, "%s "%T", g_sPluginTag, "You hurt a Traitor", iVictim, iVictim);
+				CPrintToChat(iAttacker, "%s %T", g_sPluginTag, "You hurt a Traitor", iVictim, iVictim);
 			}
 
 			TTT_SetClientCredits(iAttacker, TTT_GetClientCredits(iAttacker) + g_iCreditsTaserHurtTraitor);
@@ -355,7 +355,7 @@ public Action OnTraceAttack(int iVictim, int &iAttacker, int &inflictor, float &
 			}
 			else
 			{
-				CPrintToChat(iAttacker, "%s "%T", g_sPluginTag, "You hurt a Detective", iVictim, iVictim);
+				CPrintToChat(iAttacker, "%s %T", g_sPluginTag, "You hurt a Detective", iVictim, iVictim);
 			}
 		}
 		else if (iRole == TTT_TEAM_INNOCENT)
@@ -368,7 +368,7 @@ public Action OnTraceAttack(int iVictim, int &iAttacker, int &inflictor, float &
 			}
 			else
 			{
-				CPrintToChat(iAttacker, "%s "%T", g_sPluginTag, "You hurt an Innocent", iVictim, iVictim);
+				CPrintToChat(iAttacker, "%s %T", g_sPluginTag, "You hurt an Innocent", iVictim, iVictim);
 			}
 		}
 		
