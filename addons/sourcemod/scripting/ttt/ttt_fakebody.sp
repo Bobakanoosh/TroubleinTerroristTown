@@ -96,7 +96,7 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort, bool count
 				char sBuffer[MAX_ITEM_LENGTH];
 				g_cLongName.GetString(sBuffer, sizeof(sBuffer));
 				
-				CPrintToChat(client, g_sPluginTag, "Bought All", client, sBuffer, g_cCount.IntValue);
+				CPrintToChat(client, "%s "%T", g_sPluginTag, "Bought All", client, sBuffer, g_cCount.IntValue);
 				return Plugin_Stop;
 			}
 
@@ -184,11 +184,11 @@ public Action TTT_OnBodyChecked(int client, int[] iRagdollC)
 		{
 			if (g_cShowFakeMessage.BoolValue&& !iRagdollC[Found])
 			{
-				CPrintToChat(j, g_sPluginTag, "Found Fake", j, client);
+				CPrintToChat(j, "%s "%T", g_sPluginTag, "Found Fake", j, client);
 			}
 			else if (!g_cShowFakeMessage.BoolValue && !iRagdollC[Found])
 			{
-				CPrintToChat(j, g_sPluginTag, "Found Traitor", j, client, iRagdollC[VictimName]);
+				CPrintToChat(j, "%s "%T", g_sPluginTag, "Found Traitor", j, client, iRagdollC[VictimName]);
 			}
 			else if (iRagdollC[Found])
 			{

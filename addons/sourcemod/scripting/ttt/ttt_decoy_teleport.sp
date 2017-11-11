@@ -90,12 +90,12 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort, bool count
 
 			if (role == TTT_TEAM_TRAITOR && g_iTPCount[client] >= g_cTCount.IntValue)
 			{
-				CPrintToChat(client, g_sPluginTag, "Bought All", client, sBuffer, g_cTCount.IntValue);
+				CPrintToChat(client, "%s "%T", g_sPluginTag, "Bought All", client, sBuffer, g_cTCount.IntValue);
 				return Plugin_Stop;
 			}
 			else if (role == TTT_TEAM_DETECTIVE && g_iDPCount[client] >= g_cDCount.IntValue)
 			{
-				CPrintToChat(client, g_sPluginTag, "Bought All", client, sBuffer, g_cDCount.IntValue);
+				CPrintToChat(client, "%s "%T", g_sPluginTag, "Bought All", client, sBuffer, g_cDCount.IntValue);
 				return Plugin_Stop;
 			}
 
@@ -147,7 +147,7 @@ public Action Event_DecoyStarted(Event event, const char[] name, bool dontBroadc
 		if (stuck)
 		{
 			TeleportEntity(client, fOldPos, NULL_VECTOR, NULL_VECTOR);
-			CPrintToChat(client, g_sPluginTag, "DT: Invalid Position", client);
+			CPrintToChat(client, "%s "%T", g_sPluginTag, "DT: Invalid Position", client);
 		}
 
 		AcceptEntityInput(entity, "kill");

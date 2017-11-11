@@ -70,7 +70,7 @@ public Action Command_ID(int client, int args)
 	{
 		if (g_fCooldownPlayer[client] != 0.0 && ((GetEngineTime() - g_fCooldownPlayer[client]) < g_cCooldown.FloatValue))
 		{
-			CPrintToChat(client, g_sPluginTag, "ID: Cooldown", client);
+			CPrintToChat(client, "%s "%T", g_sPluginTag, "ID: Cooldown", client);
 			return Plugin_Handled;
 		}
 		g_fCooldownPlayer[client] = GetEngineTime();
@@ -79,13 +79,13 @@ public Action Command_ID(int client, int args)
 
 	if (!IsPlayerAlive(client))
 	{
-		CPrintToChat(client, g_sPluginTag, "ID: Need to be Alive", client);
+		CPrintToChat(client, "%s "%T", g_sPluginTag, "ID: Need to be Alive", client);
 		return Plugin_Handled;
 	}
 
 	if (!g_bHasID[client])
 	{
-		CPrintToChat(client, g_sPluginTag, "ID: Need to buy ID", client);
+		CPrintToChat(client, "%s "%T", g_sPluginTag, "ID: Need to buy ID", client);
 		return Plugin_Handled;
 	}
 
@@ -97,7 +97,7 @@ public Action Command_ID(int client, int args)
 
 	LoopValidClients(i)
 	{
-		CPrintToChat(i, g_sPluginTag, "ID: Shows ID", i, sName);
+		CPrintToChat(i, "%s "%T", g_sPluginTag, "ID: Shows ID", i, sName);
 	}
 
 	return Plugin_Handled;
@@ -142,7 +142,7 @@ public Action TTT_OnItemPurchased(int client, const char[] itemshort, bool count
 				return Plugin_Stop;
 			}
 
-			CPrintToChat(client, g_sPluginTag, "ID: Buy Message", client);
+			CPrintToChat(client, "%s "%T", g_sPluginTag, "ID: Buy Message", client);
 
 			g_bHasID[client] = true;
 		}

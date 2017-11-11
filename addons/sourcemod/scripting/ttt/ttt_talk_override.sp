@@ -74,21 +74,21 @@ public Action Command_TVoice(int client, int args)
 
 	if (g_bTVoice[client])
 	{
-		CPrintToChat(client, g_sPluginTag, "Traitor Voice Chat: Disabled!", client);
+		CPrintToChat(client, "%s "%T", g_sPluginTag, "Traitor Voice Chat: Disabled!", client);
 		g_bTVoice[client] = false;
 		LoopValidClients(i)
 		{
 			SetListenOverride(i, client, Listen_Yes);
 			if (TTT_GetClientRole(i) == TTT_TEAM_TRAITOR)
 			{
-				CPrintToChat(i, g_sPluginTag, "stopped talking in Traitor Voice Chat", i, client);
+				CPrintToChat(i, "%s "%T", g_sPluginTag, "stopped talking in Traitor Voice Chat", i, client);
 			}
 		}
 	}
 	else
 	{
 		g_bTVoice[client] = true;
-		CPrintToChat(client, g_sPluginTag, "Traitor Voice Chat: Enabled!", client);
+		CPrintToChat(client, "%s "%T", g_sPluginTag, "Traitor Voice Chat: Enabled!", client);
 		LoopValidClients(i)
 		{
 			if (TTT_GetClientRole(i) != TTT_TEAM_TRAITOR)
@@ -97,7 +97,7 @@ public Action Command_TVoice(int client, int args)
 			}
 			else
 			{
-				CPrintToChat(i, g_sPluginTag, "is now talking in Traitor Voice Chat", i, client);
+				CPrintToChat(i, "%s "%T", g_sPluginTag, "is now talking in Traitor Voice Chat", i, client);
 			}
 		}
 	}
